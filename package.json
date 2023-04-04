@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.15.11",
+    "eslint": "8.37.0",
     "tsup": "^6.7.0",
     "tsx": "^3.12.6",
     "typescript": "^5.0.3"

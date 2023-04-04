@@ -9,7 +9,7 @@ const envSchema = z.object({
   PORT: z.coerce.number().default(3333),
 });
 
-// safeParse: try ti validate the object
+// safeParse: try to validate the object
 const _env = envSchema.safeParse(process.env);
 
 // if the validation fails, show an error
