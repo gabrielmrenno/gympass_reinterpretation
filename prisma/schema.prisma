@@ -21,7 +21,7 @@ model User {
 
   // it's not a field in the database, but a relation -> only to prisma to know how to handle the data
   // only primary parameter will be stored in the database
-  chueckIns CheckIn[]
+  checkIns CheckIn[]
 
   // change the table's name
   @@map("users")
