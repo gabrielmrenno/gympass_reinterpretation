@@ -13,10 +13,32 @@ datasource db {
 // creating a new model: represents a table in the database
 model User {
   // @id: primary key and uuid as default value
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String
+  id            String   @id @default(uuid())
+  email         String   @unique
+  name          String
+  password_hash String
+  created_at    DateTime @default(now())
 
   // change the table's name
   @@map("users")
+}
+
+model CheckIn {
+  id           String    @id @default(uuid())
+  created_at   DateTime  @default(now())
+  validated_at DateTime?
+
+  @@map("check_ins")
+}
+
+model Gym {
+  id          String  @id @default(uuid())
+  title       String
+  // optional field
+  description String?
+  phone       String?
+  latitude    Decimal
+  longitude   Decimal
+
+  @@map("gyms")
 }
