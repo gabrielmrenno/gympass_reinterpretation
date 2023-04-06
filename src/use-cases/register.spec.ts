@@ -49,7 +49,7 @@ describe("Register use case", () => {
     });
 
     // expect that the promise throw an error
-    expect(() =>
+    await expect(() =>
       registerUseCase.execute({
         name: "John Doe",
         email,
