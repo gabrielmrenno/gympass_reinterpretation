@@ -1,10 +1,8 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { hash } from "bcryptjs";
-import { prisma } from "@/lib/prisma";
 import { z } from "zod";
-import { RegisterUseCase } from "@/use-cases/register";
-import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
+
 import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists-error";
+import { makeRegisterUseCase } from "@/use-cases/factories/make-register-use-case";
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
   const registerBodySchema = z.object({
@@ -16,9 +14,8 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
   // parse throws if the data is invalid and nothing after this line will run
   const { name, email, password } = registerBodySchema.parse(request.body);
 
-  // creating a new instance of the repository and injecting into use case
-  const usersRepository = new PrismaUsersRepository();
-  const registerUseCase = new RegisterUseCase(usersRepository);
+  // getting use case using Factory pattern
+  const registerUseCase = makeRegisterUseCase();
 
   try {
     await registerUseCase.execute({
