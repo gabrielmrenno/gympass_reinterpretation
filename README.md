@@ -19,7 +19,7 @@ Gympass style app
 
 - [x] O usuário não deve poder se cadastrar com um e-mail já existente;
 - [x] O usuário não pode fazer mais de 1 check-in no dia;
-- [ ] O usuário não pode fazer check-in se não estiver perto (100m) da academia;
+- [x] O usuário não pode fazer check-in se não estiver perto (100m) da academia;
 - [ ] O check-in só pode ser validado apó 20 minutos após criado;
 - [ ] O check-in só pode ser validado por adminstradores;
 - [ ] A academia só pode ser cadastrada por administradores;
