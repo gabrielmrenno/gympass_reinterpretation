@@ -1,15 +1,46 @@
+import "dotenv/config";
+
+import { randomUUID } from "node:crypto";
+import { execSync } from "node:child_process";
 import { Environment } from "vitest";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+function generateDatabaseURL(schema: string) {
+  if (!process.env.DATABASE_URL) {
+    throw new Error("Please provde a DATABASE_URL environment variable.");
+  }
+
+  const url = new URL(process.env.DATABASE_URL);
+
+  url.searchParams.set("schema", schema);
+
+  return url.toString();
+}
 
 export default <Environment>{
   name: "prisma",
   // code to be executed before each file tests
   async setup() {
-    console.log("setup");
+    // create an unique db (by schema) for each test
 
+    const schema = randomUUID();
+    const databaseURL = generateDatabaseURL(schema);
+
+    process.env.DATABASE_URL = databaseURL;
+
+    execSync("npm prisma migrate deploy ");
     return {
       // after tests to be executed
-      teardown() {
-        console.log("teardown");
+      async teardown() {
+        // delete schema
+
+        await prisma.$executeRawUnsafe(
+          `DROP SCHEMA IF EXISTS "${schema}" CASCADE`
+        );
+
+        await prisma.$disconnect();
       },
     };
   },
