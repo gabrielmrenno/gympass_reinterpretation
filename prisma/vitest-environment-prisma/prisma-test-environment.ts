@@ -30,7 +30,7 @@ export default <Environment>{
 
     process.env.DATABASE_URL = databaseURL;
 
-    execSync("npm prisma migrate deploy ");
+    execSync("npx prisma migrate deploy ");
     return {
       // after tests to be executed
       async teardown() {
