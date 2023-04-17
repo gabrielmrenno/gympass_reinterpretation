@@ -1,8 +1,9 @@
 import fastify from "fastify";
 import fastifyJwt from "@fastify/jwt";
 import { ZodError, z } from "zod";
-import { appRoutes } from "./http/routes";
+import { usersRoutes } from "./http/controllers/users/routes";
 import { env } from "./env";
+import { gymsRoutes } from "./http/controllers/gyms/routes";
 
 // Create a Fastify server
 export const app = fastify();
@@ -13,7 +14,8 @@ app.register(fastifyJwt, {
 });
 
 // register the routes' plugin
-app.register(appRoutes);
+app.register(usersRoutes);
+app.register(gymsRoutes);
 
 // creating a global error handler
 app.setErrorHandler((error, _, reply) => {
