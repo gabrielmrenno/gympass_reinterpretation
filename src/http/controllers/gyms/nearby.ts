@@ -15,7 +15,7 @@ export async function nearby(request: FastifyRequest, reply: FastifyReply) {
   });
 
   // parse throws if the data is invalid and nothing after this line will run
-  const { latitude, longitude } = nearbyGymsQuerySchema.parse(request.body);
+  const { latitude, longitude } = nearbyGymsQuerySchema.parse(request.query);
 
   // getting use case using Factory pattern
   const fetchNearbyGymsUseCase = makeFetchNearbyGymsUseCase();

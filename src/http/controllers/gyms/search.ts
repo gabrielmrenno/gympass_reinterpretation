@@ -12,7 +12,7 @@ export async function search(request: FastifyRequest, reply: FastifyReply) {
   });
 
   // parse throws if the data is invalid and nothing after this line will run
-  const { query, page } = searchGymsQuerySchema.parse(request.body);
+  const { query, page } = searchGymsQuerySchema.parse(request.query);
 
   // getting use case using Factory pattern
   const searchGymsUseCase = makeSearchGymsUseCase();
