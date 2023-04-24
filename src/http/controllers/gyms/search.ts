@@ -22,8 +22,7 @@ export async function search(request: FastifyRequest, reply: FastifyReply) {
     page,
   });
 
-  reply.status(201).send({
-    message: "Gym created successfully",
+  reply.status(200).send({
     data: gyms,
   });
 }
