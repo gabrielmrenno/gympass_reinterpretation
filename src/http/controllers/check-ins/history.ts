@@ -21,7 +21,7 @@ export async function history(request: FastifyRequest, reply: FastifyReply) {
     page,
   });
 
-  reply.status(201).send({
+  reply.status(200).send({
     data: checkIns,
   });
 }
