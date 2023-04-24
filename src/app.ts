@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import fastifyJwt from "@fastify/jwt";
+import fastifyCookie from "@fastify/cookie";
 import { ZodError, z } from "zod";
 import { usersRoutes } from "./http/controllers/users/routes";
 import { env } from "./env";
@@ -12,7 +13,16 @@ export const app = fastify();
 // register jwt to server
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
+  cookie: {
+    cookieName: "refreshToken",
+    signed: false,
+  },
+  sign: {
+    expiresIn: "10m",
+  },
 });
+
+app.register(fastifyCookie);
 
 // register the routes' plugin
 app.register(usersRoutes);
