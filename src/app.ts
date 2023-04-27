@@ -7,6 +7,8 @@ import { env } from "./env";
 import { gymsRoutes } from "./http/controllers/gyms/routes";
 import { checkInsRoutes } from "./http/controllers/check-ins/routes";
 
+// comment to test github actions
+
 // Create a Fastify server
 export const app = fastify();
 
