@@ -45,11 +45,15 @@ export async function authenticate(
       }
     );
 
+    // putting refresh token on cookies -> cookies can be avoided to be accessed by client
     reply
-      .setCookie("refreshRoken", refreshToken, {
+      .setCookie("refreshToken", refreshToken, {
+        // which route can access: "/" all routes on back-end
         path: "/",
+        // cookies encrypted bt HTTPs
         secure: true,
         sameSite: true,
+        // only can be accessed by back end, by request and response
         httpOnly: true,
       })
       .status(200)

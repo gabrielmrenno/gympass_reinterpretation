@@ -15,6 +15,7 @@ app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
   cookie: {
     cookieName: "refreshToken",
+    // this info is not signed (hashed)
     signed: false,
   },
   sign: {
