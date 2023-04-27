@@ -10,12 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  MEMBER
+}
+
 // creating a new model: represents a table in the database
 model User {
   // @id: primary key and uuid as default value
   id            String   @id @default(uuid())
   email         String   @unique
   name          String
+  role          Role     @default(MEMBER)
   password_hash String
   created_at    DateTime @default(now())
 

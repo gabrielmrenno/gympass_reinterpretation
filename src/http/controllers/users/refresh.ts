@@ -4,10 +4,14 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
   // validate if user is authenticated seeing on cookies, where refreshToken is
   await request.jwtVerify({ onlyCookie: true });
 
+  const { role } = request.user;
+
   // setting token from JWT, setting sub as user id
   const token = await reply.jwtSign(
     // payload: additional info in token
-    {},
+    {
+      role,
+    },
     {
       sign: {
         sub: request.user.sub,
@@ -16,7 +20,9 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
   );
 
   const refreshToken = await reply.jwtSign(
-    {},
+    {
+      role,
+    },
     {
       sign: {
         sub: request.user.sub,
